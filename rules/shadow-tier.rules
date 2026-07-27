@@ -1,0 +1,11 @@
+alert tcp any any -> 192.168.20.0/24 any (msg: "SHADOWTIER Persistence Detected source returning after silent absorption"; flow:stateless; threshold: type both , track by_src, count 3, seconds 60; classtype: attempted-recon; sid:1000001; rev:1;)
+
+alert tcp any any -> 192.168.20.0/24 any (msg: "SHADOWTIER Corrupted Assumption SYN scan behavior detected"; flags: S, 12; threshold: type both, track by_src, co unt 3, seconds 30; classtype: attempted-recon; sid: 1000002; rev:1;)
+
+alert http any any -> 192.168.20.0/24 any (msg: "SHADOWTIER Directed intent Financial endpoint targeting detected "; http.method; "content":"POST"; http.uri; content":"/login"; nocase; threshold:type both, track by_src, count 3, seconds 30; classtype: attempted-user; sid:1000003; rev:1;)
+
+alert http any any -> 192.168.20.0/24 any (msg: "SHADOWTIER Directed intent Financial endpoint unauthorized user detected"; http.method; "content": "POST"; http. uri; "content":"/auth"; nocase; threshold: type both, track by_src, count 3, seconds 30; classtype: attempted-user; sid:1000004;rev:1;)
+
+alert http any any -> 192.168.20.0/24 any (msg: "SHADWTIER Directed intent Financial endpoint unauthorized Admin detected"; http.method; "content": "POST"; http .uri; "content":"/admin"; nocase; threshold: type both, track by_src, count 3, seconds 30; classtype: attempted-user; sid:1000005; rev:1;)
+
+alert http any any -> 192.168.20.0/24 any (msg: "SHADOWTIER Direted intent Financial endpoint targeting api detected"; http.method; "content": "POST"; http.uri; "content":"/api"; nocase; threshold: type both, track by_src, count 3, seconds 30; classtype: attempted-user sid: 1000006; rev:1;)
