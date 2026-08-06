@@ -1,0 +1,1 @@
+334,945 flood packets were being absorbed and dropped silently by XDP, Suricata was still detecting the adaptive attacker behavior underneath. Both layers working simultaneously.
